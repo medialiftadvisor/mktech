@@ -163,12 +163,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         <div className="rounded-3xl border border-slate-200/90 bg-white p-8 sm:p-12 shadow-xs">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Founder Photo Area */}
-            <div className="lg:col-span-4 flex flex-col items-center justify-center p-8 rounded-2xl bg-gradient-to-br from-[#0B1F3A] to-[#1554A3] text-white text-center">
-              <div className="w-28 h-28 rounded-full overflow-hidden bg-white/10 border-2 border-white/20 mb-4 shadow-md flex items-center justify-center">
+            <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0B1F3A] to-[#1554A3] text-white text-center shadow-lg">
+              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-2xl overflow-hidden bg-white/10 border-2 border-white/20 mb-4 shadow-xl flex items-center justify-center">
                 <img
                   src={teamData.founder.photoUrl}
                   alt={teamData.founder.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
               <h3 className="text-2xl font-bold tracking-tight text-white">
@@ -177,7 +177,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               <span className="text-xs uppercase tracking-wider font-semibold text-sky-300 mt-1">
                 {teamData.founder.title}
               </span>
-              <span className="text-[11px] text-slate-300 mt-3 font-mono">
+              <span className="text-[11px] text-slate-300 mt-2 font-mono">
                 MKTECH Leadership
               </span>
             </div>
@@ -268,7 +268,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   }`}
                 >
                   <div
-                    className={`w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center font-bold text-sm mb-3 border ${
+                    className={`w-20 h-20 rounded-2xl overflow-hidden flex items-center justify-center font-bold text-sm mb-3.5 border shadow-xs ${
                       member.isFounder
                         ? "border-sky-400/40 bg-[#1554A3]"
                         : "border-slate-200 bg-slate-100"
@@ -278,7 +278,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                       <img
                         src={member.photoUrl}
                         alt={member.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-top"
                       />
                     ) : (
                       <span className={member.isFounder ? "text-white" : "text-slate-700"}>
