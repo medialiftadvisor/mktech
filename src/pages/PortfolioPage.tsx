@@ -31,9 +31,10 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onNavigate }) => {
 
   const categories = [
     "All",
-    "Services & Logistics",
+    "Real Estate & Infra",
+    "Hyperlocal & Quick Commerce",
+    "Solar & Clean Energy",
     "Interior & Home Decor",
-    "Enterprise & Trading",
   ];
 
   const filteredClients = clientPortfolioData.filter((item) => {
