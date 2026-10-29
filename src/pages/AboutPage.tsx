@@ -162,10 +162,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
         <div className="rounded-3xl border border-slate-200/90 bg-white p-8 sm:p-12 shadow-xs">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Elegant Founder Placeholder Area (Per prompt instructions: no fake photos) */}
+            {/* Founder Photo Area */}
             <div className="lg:col-span-4 flex flex-col items-center justify-center p-8 rounded-2xl bg-gradient-to-br from-[#0B1F3A] to-[#1554A3] text-white text-center">
-              <div className="w-24 h-24 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center text-3xl font-extrabold text-white mb-4">
-                M
+              <div className="w-28 h-28 rounded-full overflow-hidden bg-white/10 border-2 border-white/20 mb-4 shadow-md flex items-center justify-center">
+                <img
+                  src={teamData.founder.photoUrl}
+                  alt={teamData.founder.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <h3 className="text-2xl font-bold tracking-tight text-white">
                 {teamData.founder.name}
@@ -264,13 +268,23 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   }`}
                 >
                   <div
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm mb-3 ${
+                    className={`w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center font-bold text-sm mb-3 border ${
                       member.isFounder
-                        ? "bg-[#1554A3] text-white"
-                        : "bg-slate-100 text-slate-700"
+                        ? "border-sky-400/40 bg-[#1554A3]"
+                        : "border-slate-200 bg-slate-100"
                     }`}
                   >
-                    {member.avatarPlaceholder}
+                    {member.photoUrl ? (
+                      <img
+                        src={member.photoUrl}
+                        alt={member.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className={member.isFounder ? "text-white" : "text-slate-700"}>
+                        {member.avatarPlaceholder}
+                      </span>
+                    )}
                   </div>
                   <h5
                     className={`font-bold text-sm tracking-tight ${

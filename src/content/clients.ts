@@ -3,7 +3,7 @@ export interface ClientPortfolioItem {
   name: string;
   url: string;
   displayUrl: string;
-  category: "Real Estate & Infra" | "Hyperlocal & Quick Commerce" | "Interior & Home Decor" | "Solar & Clean Energy" | "Services & Logistics";
+  category: "Digital Marketing & Growth" | "Real Estate & Infra" | "Hyperlocal & Quick Commerce" | "Solar & Clean Energy" | "Interior & Home Decor";
   tagline: string;
   description: string;
   challengeSolved: string;
@@ -18,6 +18,40 @@ export interface ClientPortfolioItem {
 }
 
 export const clientPortfolioData: ClientPortfolioItem[] = [
+  {
+    id: "medialiftadvisor",
+    name: "Media Lift Advisor",
+    url: "https://www.medialiftadvisor.com",
+    displayUrl: "www.medialiftadvisor.com",
+    category: "Digital Marketing & Growth",
+    clientSector: "Digital Marketing, Brand Scaling & Performance Advertising",
+    tagline: "Full-funnel digital marketing & growth advisory firm scaling modern brands",
+    description:
+      "A high-impact digital marketing agency platform offering omnichannel performance marketing, brand identity engineering, SEO domination, social media growth, and conversion rate optimization (CRO) for scaling businesses.",
+    challengeSolved:
+      "Engineered an authoritative, conversion-driven digital agency portal equipped with live campaign audits, service matrices, client performance case studies, and instant consultation scheduling.",
+    techStack: ["Modern Agency Web Architecture", "High-Converting Funnel UI", "Interactive Audit Engine", "Global Cloud CDN"],
+    features: [
+      "Omnichannel performance marketing & brand scaling showcase",
+      "Dynamic digital marketing service matrices (SEO, PPC, Social, Branding)",
+      "Instant strategy consultation booking & marketing audit form",
+      "Interactive client growth case studies & ROI dashboards",
+    ],
+    deliverables: [
+      "High-Conversion Digital Marketing Agency Web Platform",
+      "Interactive Strategy Audit & Lead Funnel Pipeline",
+      "On-Page Technical SEO & Global Schema Architecture",
+      "Sub-second Mobile Performance Optimization",
+    ],
+    year: "2024",
+    status: "Live & Active",
+    featured: true,
+    metrics: [
+      { label: "Core Expertise", value: "360° Marketing" },
+      { label: "Campaign Growth", value: "3.8x ROI" },
+      { label: "Lead Inquiries", value: "Active Global" },
+    ],
+  },
   {
     id: "successrj",
     name: "Success RJ Infra",

@@ -3,6 +3,7 @@ export interface TeamMember {
   name: string;
   role: string;
   focus: string;
+  photoUrl?: string;
   isFounder?: boolean;
   avatarPlaceholder?: string;
   isSlotPending?: boolean;
@@ -14,6 +15,7 @@ export interface TeamContent {
     role: string;
     title: string;
     bio: string;
+    photoUrl: string;
     leadershipFocus: string[];
   };
   teamSummary: {
@@ -34,6 +36,7 @@ export const teamData: TeamContent = {
     role: "Founder",
     title: "Founder, MKTECH",
     bio: "Mahesh leads MKTECH's business direction, product thinking, client relationships and growth initiatives.",
+    photoUrl: "/mahesh.png",
     leadershipFocus: [
       "Real-world problem discovery & user research",
       "Strategic business direction & roadmap planning",
@@ -45,7 +48,7 @@ export const teamData: TeamContent = {
     headline: "A 5-Member Team",
     size: "5 Members",
     description:
-      "MKTECH operates with a five-member team focused on technology, execution, business requirements and customer problem solving.",
+      "MKTECH operates with a dedicated team focused on technology, execution, business requirements and customer problem solving.",
     corePillars: [
       {
         title: "Technology & Engineering",
@@ -55,7 +58,7 @@ export const teamData: TeamContent = {
       {
         title: "Product & Architecture",
         description:
-          "Translating messy operational pain-points into clear, intuitive product roadmaps.",
+          "Translating operational pain-points into clear, intuitive product roadmaps.",
       },
       {
         title: "Execution & Delivery",
@@ -75,6 +78,7 @@ export const teamData: TeamContent = {
       name: "Mahesh",
       role: "Founder",
       focus: "Business Direction, Product Thinking & Client Relationships",
+      photoUrl: "/mahesh.png",
       isFounder: true,
       avatarPlaceholder: "M",
       isSlotPending: false,
@@ -84,6 +88,7 @@ export const teamData: TeamContent = {
       name: "Sachin Yadav",
       role: "Project Manager",
       focus: "Project Planning, Sprint Governance & Client Delivery",
+      photoUrl: "/sachin.png",
       isFounder: false,
       avatarPlaceholder: "SY",
       isSlotPending: false,
@@ -93,6 +98,7 @@ export const teamData: TeamContent = {
       name: "Prashant Boyal",
       role: "Team Leader",
       focus: "Technical Leadership, Code Quality & Architecture Execution",
+      photoUrl: "/prashant.png",
       isFounder: false,
       avatarPlaceholder: "PB",
       isSlotPending: false,
@@ -102,6 +108,7 @@ export const teamData: TeamContent = {
       name: "Pradhyuman Saini",
       role: "Project Developer",
       focus: "Full-Stack Development, Feature Engineering & System Integration",
+      photoUrl: "/pradhyuman.png",
       isFounder: false,
       avatarPlaceholder: "PS",
       isSlotPending: false,

@@ -31,6 +31,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onNavigate }) => {
 
   const categories = [
     "All",
+    "Digital Marketing & Growth",
     "Real Estate & Infra",
     "Hyperlocal & Quick Commerce",
     "Solar & Clean Energy",
