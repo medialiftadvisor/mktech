@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="none">
+  <!-- MKTECH Official Brand Mark and Wordmark -->
+  <!-- Blue: #1952A5 | Slate Grey: #545A60 -->
+
+  <g id="brand-mark">
+    <!-- Left Chevron Bracket: < -->
+    <path 
+      d="M236 408 L148 468 L236 528" 
+      stroke="#545A60" 
+      stroke-width="38" 
+      stroke-linecap="square" 
+      stroke-linejoin="miter"
+    />
+
+    <!-- Right Chevron Bracket: > -->
+    <path 
+      d="M680 408 L768 468 L680 528" 
+      stroke="#545A60" 
+      stroke-width="38" 
+      stroke-linecap="square" 
+      stroke-linejoin="miter"
+    />
+
+    <!-- Interlocking M & K -->
+    <!-- Left Blue 'M' -->
+    <!-- Left vertical bar of M -->
+    <path d="M266 318 H318 V600 H266 Z" fill="#1952A5" />
+
+    <!-- Center downward peak of M -->
+    <path d="M318 318 L406 526 L494 318 H546 L406 600 L318 392 V318 Z" fill="#1952A5" />
+
+    <!-- Right bottom stem notch of M -->
+    <path d="M494 542 H546 V600 H494 Z" fill="#1952A5" />
+
+    <!-- Right Charcoal 'K' -->
+    <!-- Upper right diagonal arm of K -->
+    <path d="M490 478 L656 318 H720 L554 478 Z" fill="#545A60" />
+
+    <!-- Lower right diagonal leg of K -->
+    <path d="M554 478 L720 600 H656 L490 478 Z" fill="#545A60" />
+  </g>
+
+  <!-- Wordmark: MKTECH -->
+  <g id="wordmark" transform="translate(105, 800)">
+    <!-- "MK" in Bold Blue (#1952A5) -->
+    <!-- Letter M -->
+    <path d="M0 0 V-150 H32 L78 -64 L124 -150 H156 V0 H126 V-106 L86 -32 H70 L30 -106 V0 Z" fill="#1952A5" />
+    
+    <!-- Letter K -->
+    <path d="M184 0 V-150 H214 V-66 L268 -150 H304 L244 -54 L308 0 H270 L214 -40 V0 Z" fill="#1952A5" />
+
+    <!-- Letter T -->
+    <path d="M344 -150 H430 V-124 H401 V0 H373 V-124 H344 Z" fill="#545A60" />
+
+    <!-- Letter E -->
+    <path d="M452 0 V-150 H526 V-124 H480 V-88 H520 V-62 H480 V-26 H528 V0 Z" fill="#545A60" />
+
+    <!-- Letter C -->
+    <path d="M632 -118 C620 -138 598 -152 572 -152 C532 -152 502 -120 502 -75 C502 -30 532 2 572 2 C598 2 620 -12 632 -32 L610 -48 C602 -34 588 -24 572 -24 C546 -24 530 -44 530 -75 C530 -106 546 -126 572 -126 C588 -126 602 -116 610 -102 Z" fill="#545A60" />
+
+    <!-- Letter H -->
+    <path d="M654 0 V-150 H682 V-88 H762 V-150 H790 V0 H762 V-62 H682 V0 Z" fill="#545A60" />
+  </g>
+</svg>

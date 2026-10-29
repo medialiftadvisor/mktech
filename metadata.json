@@ -1,0 +1,6 @@
+{
+  "name": "MKTECH",
+  "description": "Technology for a Better Tomorrow. Turning real-world problems into practical digital solutions for businesses and communities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mktech.ai.studio/sitemap.xml
