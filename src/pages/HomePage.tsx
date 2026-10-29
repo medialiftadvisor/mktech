@@ -11,6 +11,8 @@ import { industriesData } from "../content/industries";
 import { solutionsData } from "../content/solutions";
 import { faqData } from "../content/faq";
 import { clientPortfolioData } from "../content/clients";
+import { Card3D } from "../components/ui/Card3D";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   Target,
@@ -67,24 +69,34 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div className="space-y-20 md:space-y-28 pb-16">
       {/* ==================================================
-          1. HERO SECTION
+          1. HERO SECTION WITH 3D DEPTH & AMBIENT ORBS
           ================================================== */}
-      <section className="relative pt-6 sm:pt-10 pb-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-6 sm:pt-12 pb-10 overflow-hidden">
+        {/* Floating 3D Ambient Orbs in Background */}
+        <div className="absolute top-10 left-1/4 w-72 h-72 rounded-full bg-gradient-to-tr from-[#1554A3]/20 to-sky-400/20 blur-3xl pointer-events-none animate-float-slow" />
+        <div className="absolute bottom-10 right-1/4 w-80 h-80 rounded-full bg-gradient-to-br from-indigo-500/15 to-[#1554A3]/15 blur-3xl pointer-events-none animate-float-reverse" />
+        <div className="absolute inset-0 bg-grid-tech pointer-events-none opacity-60" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             {/* Left Content (7 cols) */}
-            <div className="lg:col-span-7 space-y-6">
-              {/* Clean Pre-title (No pill badges) */}
-              <div className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-[#1554A3]">
-                <span className="w-2 h-2 rounded-full bg-[#1554A3]" />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7 space-y-6"
+            >
+              {/* Clean Pre-title (3D Glass Badge) */}
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 border border-slate-200 shadow-xs text-xs font-semibold tracking-wider uppercase text-[#1554A3] backdrop-blur-md">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#1554A3] animate-pulse" />
                 <span>Pre-Seed Technology Startup</span>
-                <span className="text-slate-400">·</span>
-                <span className="text-slate-600 font-medium">Built for Real-World Impact</span>
+                <span className="text-slate-300">|</span>
+                <span className="text-slate-600 font-medium lowercase first-letter:uppercase">Problem-Solving Architecture</span>
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#0B1F3A] tracking-tight leading-[1.12] text-balance">
-                Technology for a Better Tomorrow.
+              <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#0B1F3A] tracking-tight leading-[1.12] text-balance">
+                Technology for a <span className="bg-gradient-to-r from-[#1554A3] via-[#2563EB] to-[#38BDF8] bg-clip-text text-transparent">Better Tomorrow.</span>
               </h1>
 
               {/* Supporting Headline */}
@@ -110,29 +122,36 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <Button
                   variant="outline"
                   size="lg"
-                  onClick={() => onNavigate("/contact")}
+                  onClick={() => onNavigate("/portfolio")}
                 >
-                  Let's Build Together
+                  View Client Portfolio
                 </Button>
               </div>
 
               {/* Verified Trust Strip */}
               <div className="pt-6 border-t border-slate-200/80 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-500">
-                <div className="flex items-center gap-1.5 font-medium text-slate-700">
+                <div className="flex items-center gap-1.5 font-semibold text-slate-700">
                   <ShieldCheck className="w-4 h-4 text-[#1554A3]" />
                   <span>5 Client Domains</span>
                 </div>
                 <span>·</span>
-                <span>Frictionless User Journeys</span>
+                <span>Sub-Second Page Loads</span>
                 <span>·</span>
-                <span>Zero Technical Slop</span>
+                <span>100% Production Tested</span>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Right Hero Visual (5 cols) */}
-            <div className="lg:col-span-5">
-              <AbstractTechVisual variant="hero" />
-            </div>
+            {/* Right Hero Visual (5 cols) with 3D Tilt perspective */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 relative"
+            >
+              <div className="relative rounded-3xl p-2 bg-gradient-to-b from-white/90 to-slate-100/60 shadow-2xl border border-slate-200/90 backdrop-blur-xl">
+                <AbstractTechVisual variant="hero" />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -165,61 +184,85 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </Button>
           </div>
 
-          {/* 4 Featured Client Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {clientPortfolioData.map((client) => (
-              <div
+          {/* 5 Featured Client Cards with 3D Tilt Physics & Glow */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {clientPortfolioData.map((client, idx) => (
+              <Card3D
                 key={client.id}
-                className="group rounded-2xl border border-slate-200/80 bg-[#F6F9FC] p-5 hover:bg-white hover:border-[#1554A3]/50 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                depth={10}
+                glowColor={
+                  idx === 0
+                    ? "rgba(14, 165, 233, 0.25)"
+                    : idx === 1
+                    ? "rgba(21, 84, 163, 0.25)"
+                    : idx === 2
+                    ? "rgba(16, 185, 129, 0.25)"
+                    : "rgba(245, 158, 11, 0.25)"
+                }
+                className="h-full"
               >
-                <div>
-                  <div className="flex items-center justify-between text-xs pb-3 border-b border-slate-200/60">
-                    <span className="font-semibold text-[#1554A3] truncate max-w-[140px]">
-                      {client.category}
-                    </span>
-                    <span className="text-emerald-700 font-medium text-[11px] flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                      Live
-                    </span>
+                <div className="p-6 flex flex-col justify-between h-full bg-gradient-to-b from-white to-slate-50/50">
+                  <div>
+                    <div className="flex items-center justify-between text-xs pb-3 border-b border-slate-100">
+                      <span className="font-bold text-[#1554A3] truncate max-w-[170px] uppercase tracking-wider text-[11px]">
+                        {client.category}
+                      </span>
+                      <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-semibold text-[10px] flex items-center gap-1 border border-emerald-200/50">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                        Live
+                      </span>
+                    </div>
+
+                    <h3 className="font-black text-xl text-slate-900 mt-4 group-hover:text-[#1554A3] transition-colors tracking-tight">
+                      {client.name}
+                    </h3>
+                    <a
+                      href={client.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-mono text-[#1554A3] hover:underline mt-1 font-semibold"
+                    >
+                      {client.displayUrl}
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+
+                    <p className="text-xs text-slate-600 mt-3 line-clamp-2 leading-relaxed">
+                      {client.tagline}
+                    </p>
+
+                    {/* Metric Tag */}
+                    {client.metrics && (
+                      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                          {client.metrics[0].label}:
+                        </span>
+                        <span className="text-xs font-mono font-bold text-[#1554A3]">
+                          {client.metrics[0].value}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
-                  <h3 className="font-extrabold text-lg text-slate-900 mt-3 group-hover:text-[#1554A3] transition-colors">
-                    {client.name}
-                  </h3>
-                  <a
-                    href={client.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs font-mono text-[#1554A3] hover:underline mt-0.5 font-semibold"
-                  >
-                    {client.displayUrl}
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-
-                  <p className="text-xs text-slate-600 mt-3 line-clamp-2 leading-relaxed">
-                    {client.tagline}
-                  </p>
+                  <div className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <a
+                      href={client.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1554A3] text-white hover:bg-[#0B1F3A] text-xs font-bold transition-all shadow-xs"
+                    >
+                      <span>Visit Site</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => onNavigate("/portfolio")}
+                      className="text-xs text-slate-500 hover:text-[#1554A3] font-semibold cursor-pointer"
+                    >
+                      Case Details &rarr;
+                    </button>
+                  </div>
                 </div>
-
-                <div className="mt-5 pt-3 border-t border-slate-200/60 flex items-center justify-between">
-                  <a
-                    href={client.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs font-bold text-[#1554A3] hover:text-[#0B1F3A] flex items-center gap-1"
-                  >
-                    <span>Visit Website</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("/portfolio")}
-                    className="text-[11px] text-slate-500 hover:text-slate-800 font-medium cursor-pointer"
-                  >
-                    Case Details &rarr;
-                  </button>
-                </div>
-              </div>
+              </Card3D>
             ))}
           </div>
         </div>
@@ -238,58 +281,67 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Card 1 */}
-            <div className="rounded-2xl border border-slate-200/90 bg-[#F6F9FC] p-7 transition-all duration-300 hover:border-slate-300 flex flex-col justify-between">
-              <div>
-                <span className="font-mono text-2xl font-bold text-[#1554A3] block mb-3">
-                  01
-                </span>
-                <h3 className="text-lg font-bold text-slate-900 tracking-tight">
-                  PROBLEM FIRST
-                </h3>
-                <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                  Understand the challenge before choosing the technology. We never force speculative tools onto straightforward business problems.
-                </p>
+            <Card3D depth={14} glowColor="rgba(21, 84, 163, 0.2)">
+              <div className="p-8 flex flex-col justify-between h-full bg-gradient-to-b from-white to-[#F8FAFD]">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-[#1554A3]/10 text-[#1554A3] flex items-center justify-center font-mono text-xl font-black mb-5 shadow-xs">
+                    01
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 tracking-tight">
+                    PROBLEM FIRST
+                  </h3>
+                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+                    Understand the challenge before choosing the technology. We never force speculative tools onto straightforward business problems.
+                  </p>
+                </div>
+                <div className="mt-8 pt-4 border-t border-slate-100 text-xs font-semibold text-[#1554A3] flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1554A3]" />
+                  <span>Deconstruct operational bottlenecks</span>
+                </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-slate-200/60 text-xs text-slate-500">
-                Deconstruct operational bottlenecks
-              </div>
-            </div>
+            </Card3D>
 
             {/* Card 2 */}
-            <div className="rounded-2xl border border-slate-200/90 bg-[#F6F9FC] p-7 transition-all duration-300 hover:border-slate-300 flex flex-col justify-between">
-              <div>
-                <span className="font-mono text-2xl font-bold text-[#1554A3] block mb-3">
-                  02
-                </span>
-                <h3 className="text-lg font-bold text-slate-900 tracking-tight">
-                  PRACTICAL SOLUTIONS
-                </h3>
-                <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                  Build solutions around actual user and business requirements. Interfaces are engineered to be clear, responsive, and easy to adopt.
-                </p>
+            <Card3D depth={14} glowColor="rgba(37, 99, 235, 0.2)">
+              <div className="p-8 flex flex-col justify-between h-full bg-gradient-to-b from-white to-[#F8FAFD]">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-mono text-xl font-black mb-5 shadow-xs">
+                    02
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 tracking-tight">
+                    PRACTICAL SOLUTIONS
+                  </h3>
+                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+                    Build solutions around actual user and business requirements. Interfaces are engineered to be clear, responsive, and easy to adopt.
+                  </p>
+                </div>
+                <div className="mt-8 pt-4 border-t border-slate-100 text-xs font-semibold text-blue-600 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                  <span>Intuitive, field-tested workflows</span>
+                </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-slate-200/60 text-xs text-slate-500">
-                Intuitive, field-tested workflows
-              </div>
-            </div>
+            </Card3D>
 
             {/* Card 3 */}
-            <div className="rounded-2xl border border-slate-200/90 bg-[#F6F9FC] p-7 transition-all duration-300 hover:border-slate-300 flex flex-col justify-between">
-              <div>
-                <span className="font-mono text-2xl font-bold text-[#1554A3] block mb-3">
-                  03
-                </span>
-                <h3 className="text-lg font-bold text-slate-900 tracking-tight">
-                  BUILT TO SCALE
-                </h3>
-                <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                  Design with future growth and adaptability in mind. Clean modular codebases that handle increasing transactions gracefully.
-                </p>
+            <Card3D depth={14} glowColor="rgba(16, 185, 129, 0.2)">
+              <div className="p-8 flex flex-col justify-between h-full bg-gradient-to-b from-white to-[#F8FAFD]">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-mono text-xl font-black mb-5 shadow-xs">
+                    03
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 tracking-tight">
+                    BUILT TO SCALE
+                  </h3>
+                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+                    Design with future growth and adaptability in mind. Clean modular codebases that handle increasing transactions gracefully.
+                  </p>
+                </div>
+                <div className="mt-8 pt-4 border-t border-slate-100 text-xs font-semibold text-emerald-600 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                  <span>Long-term architecture integrity</span>
+                </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-slate-200/60 text-xs text-slate-500">
-                Long-term architecture integrity
-              </div>
-            </div>
+            </Card3D>
           </div>
         </div>
       </section>

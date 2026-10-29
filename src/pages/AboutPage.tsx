@@ -15,6 +15,8 @@ import {
   Users,
 } from "lucide-react";
 import { Button } from "../components/ui/Buttons";
+import { Card3D } from "../components/ui/Card3D";
+import { motion } from "framer-motion";
 
 interface AboutPageProps {
   onNavigate: (path: string) => void;
@@ -257,62 +259,79 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">
               Core Team Roles & Coordination Architecture
             </span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-              {teamData.members.map((member) => (
-                <div
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+              {teamData.members.map((member, idx) => (
+                <Card3D
                   key={member.id}
-                  className={`rounded-xl border p-5 transition-all ${
+                  depth={12}
+                  glowColor={
                     member.isFounder
-                      ? "bg-[#0B1F3A] text-white border-slate-800 shadow-sm"
-                      : "bg-white border-slate-200/90 text-slate-800 shadow-2xs"
-                  }`}
+                      ? "rgba(14, 165, 233, 0.3)"
+                      : idx === 1
+                      ? "rgba(30, 58, 138, 0.25)"
+                      : idx === 2
+                      ? "rgba(15, 118, 110, 0.25)"
+                      : "rgba(67, 56, 202, 0.25)"
+                  }
+                  className="h-full"
                 >
                   <div
-                    className={`w-20 h-20 rounded-2xl overflow-hidden flex items-center justify-center font-bold text-sm mb-3.5 border shadow-xs ${
+                    className={`p-5 flex flex-col justify-between h-full rounded-2xl ${
                       member.isFounder
-                        ? "border-sky-400/40 bg-[#1554A3]"
-                        : "border-slate-200 bg-slate-100"
+                        ? "bg-gradient-to-b from-[#0B1F3A] to-[#0d284d] text-white"
+                        : "bg-gradient-to-b from-white to-slate-50 text-slate-800"
                     }`}
                   >
-                    {member.photoUrl ? (
-                      <img
-                        src={member.photoUrl}
-                        alt={member.name}
-                        className="w-full h-full object-cover object-top"
-                      />
-                    ) : (
-                      <span className={member.isFounder ? "text-white" : "text-slate-700"}>
-                        {member.avatarPlaceholder}
+                    <div>
+                      <div
+                        className={`w-20 h-20 rounded-2xl overflow-hidden flex items-center justify-center font-bold text-sm mb-4 border-2 shadow-md transition-transform duration-300 group-hover:scale-105 ${
+                          member.isFounder
+                            ? "border-sky-400/50 bg-[#1554A3]"
+                            : "border-slate-200 bg-white"
+                        }`}
+                      >
+                        {member.photoUrl ? (
+                          <img
+                            src={member.photoUrl}
+                            alt={member.name}
+                            className="w-full h-full object-cover object-top"
+                          />
+                        ) : (
+                          <span className={member.isFounder ? "text-white" : "text-slate-700 font-mono"}>
+                            {member.avatarPlaceholder}
+                          </span>
+                        )}
+                      </div>
+                      <h5
+                        className={`font-black text-base tracking-tight ${
+                          member.isFounder ? "text-white" : "text-slate-900"
+                        }`}
+                      >
+                        {member.name}
+                      </h5>
+                      <span
+                        className={`text-xs font-semibold block mt-0.5 ${
+                          member.isFounder ? "text-sky-300" : "text-[#1554A3]"
+                        }`}
+                      >
+                        {member.role}
+                      </span>
+                      <p
+                        className={`mt-2.5 text-xs leading-relaxed ${
+                          member.isFounder ? "text-slate-300" : "text-slate-600"
+                        }`}
+                      >
+                        {member.focus}
+                      </p>
+                    </div>
+
+                    {member.isSlotPending && (
+                      <span className="inline-block mt-4 text-[10px] text-slate-400 font-mono border-t border-slate-100 pt-2">
+                        Active Operational Role
                       </span>
                     )}
                   </div>
-                  <h5
-                    className={`font-bold text-sm tracking-tight ${
-                      member.isFounder ? "text-white" : "text-slate-900"
-                    }`}
-                  >
-                    {member.name}
-                  </h5>
-                  <span
-                    className={`text-[11px] font-medium block mt-0.5 ${
-                      member.isFounder ? "text-sky-300" : "text-[#1554A3]"
-                    }`}
-                  >
-                    {member.role}
-                  </span>
-                  <p
-                    className={`mt-2 text-[11px] leading-relaxed ${
-                      member.isFounder ? "text-slate-300" : "text-slate-500"
-                    }`}
-                  >
-                    {member.focus}
-                  </p>
-                  {member.isSlotPending && (
-                    <span className="inline-block mt-3 text-[10px] text-slate-400 font-mono">
-                      Active Operational Role
-                    </span>
-                  )}
-                </div>
+                </Card3D>
               ))}
             </div>
           </div>

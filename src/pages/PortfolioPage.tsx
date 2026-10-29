@@ -4,6 +4,8 @@ import { SectionHeading } from "../components/ui/SectionHeading";
 import { CtaSection } from "../components/ui/CtaSection";
 import { Button } from "../components/ui/Buttons";
 import { clientPortfolioData, ClientPortfolioItem } from "../content/clients";
+import { Card3D } from "../components/ui/Card3D";
+import { motion } from "framer-motion";
 import {
   ExternalLink,
   Globe,
@@ -147,135 +149,148 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Client Grid */}
+        {/* Client Grid with 3D Physics & Glow */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-          {filteredClients.map((client) => {
+          {filteredClients.map((client, idx) => {
+            const glowColors = [
+              "rgba(14, 165, 233, 0.22)",
+              "rgba(21, 84, 163, 0.22)",
+              "rgba(16, 185, 129, 0.22)",
+              "rgba(245, 158, 11, 0.22)",
+              "rgba(139, 92, 246, 0.22)",
+            ];
+            const activeGlow = glowColors[idx % glowColors.length];
+
             return (
-              <div
+              <Card3D
                 key={client.id}
-                className="group rounded-3xl border border-slate-200/90 bg-white p-7 sm:p-9 shadow-xs hover:shadow-xl hover:border-[#1554A3]/40 transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
+                depth={10}
+                glowColor={activeGlow}
+                className="h-full"
               >
-                {/* Subtle top accent gradient */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1554A3] via-[#38BDF8] to-slate-400 opacity-80" />
+                <div className="p-7 sm:p-9 flex flex-col justify-between h-full relative overflow-hidden bg-gradient-to-b from-white via-white to-slate-50/60">
+                  {/* Subtle top accent gradient */}
+                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1554A3] via-[#38BDF8] to-slate-400 opacity-90" />
 
-                <div>
-                  {/* Category and Live Badge */}
-                  <div className="flex items-center justify-between gap-2 pb-5 border-b border-slate-100">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1554A3] bg-[#1554A3]/10 px-3 py-1 rounded-full">
-                      <Globe className="w-3.5 h-3.5" />
-                      {client.category}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                      Live Website
-                    </span>
-                  </div>
+                  <div>
+                    {/* Category and Live Badge */}
+                    <div className="flex items-center justify-between gap-2 pb-5 border-b border-slate-100">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1554A3] bg-[#1554A3]/10 px-3 py-1 rounded-full uppercase tracking-wider text-[11px]">
+                        <Globe className="w-3.5 h-3.5" />
+                        {client.category}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60 shadow-2xs">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                        Live Platform
+                      </span>
+                    </div>
 
-                  {/* Header Title & Direct Link */}
-                  <div className="mt-5">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="text-2xl font-black text-slate-900 tracking-tight group-hover:text-[#1554A3] transition-colors">
-                          {client.name}
-                        </h3>
-                        <a
-                          href={client.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-sm font-mono text-[#1554A3] hover:underline mt-1 font-semibold"
-                        >
-                          {client.displayUrl}
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
+                    {/* Header Title & Direct Link */}
+                    <div className="mt-5">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h3 className="text-2xl font-black text-slate-900 tracking-tight group-hover:text-[#1554A3] transition-colors">
+                            {client.name}
+                          </h3>
+                          <a
+                            href={client.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-sm font-mono text-[#1554A3] hover:underline mt-1 font-semibold"
+                          >
+                            {client.displayUrl}
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        </div>
+                        <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-[#1554A3] group-hover:bg-[#1554A3] group-hover:text-white transition-all shadow-xs shrink-0">
+                          <Globe className="w-6 h-6" />
+                        </div>
                       </div>
-                      <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-[#1554A3] group-hover:bg-[#1554A3] group-hover:text-white transition-all shadow-xs">
-                        <Globe className="w-6 h-6" />
+
+                      <p className="mt-3 text-sm font-semibold text-slate-700">
+                        {client.tagline}
+                      </p>
+                      <p className="mt-2 text-sm text-slate-500 leading-relaxed">
+                        {client.description}
+                      </p>
+                    </div>
+
+                    {/* Challenge Solved Box */}
+                    <div className="mt-5 p-4 rounded-2xl bg-slate-50/90 border border-slate-200/70 shadow-2xs">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                        Problem Solved by MKTECH
+                      </span>
+                      <p className="text-xs text-slate-700 leading-relaxed font-medium">
+                        {client.challengeSolved}
+                      </p>
+                    </div>
+
+                    {/* Feature Highlights */}
+                    <div className="mt-5 space-y-2">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                        Key Highlights & Architecture
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700 font-medium">
+                        {client.features.map((feat, i) => (
+                          <div key={i} className="flex items-start gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mt-0.5 shrink-0" />
+                            <span>{feat}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
 
-                    <p className="mt-3 text-sm font-medium text-slate-700">
-                      {client.tagline}
-                    </p>
-                    <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-                      {client.description}
-                    </p>
-                  </div>
-
-                  {/* Challenge Solved Box */}
-                  <div className="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                      Problem Solved by MKTECH
-                    </span>
-                    <p className="text-xs text-slate-700 leading-relaxed">
-                      {client.challengeSolved}
-                    </p>
-                  </div>
-
-                  {/* Feature Highlights */}
-                  <div className="mt-5 space-y-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                      Key Highlights & Architecture
-                    </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
-                      {client.features.map((feat, i) => (
-                        <div key={i} className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mt-0.5 shrink-0" />
-                          <span>{feat}</span>
-                        </div>
+                    {/* Tech Badges */}
+                    <div className="mt-6 flex flex-wrap gap-1.5">
+                      {client.techStack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2.5 py-1 text-[11px] font-semibold rounded-lg bg-slate-100/90 text-slate-700 border border-slate-200/60"
+                        >
+                          {tech}
+                        </span>
                       ))}
                     </div>
                   </div>
 
-                  {/* Tech Badges */}
-                  <div className="mt-6 flex flex-wrap gap-1.5">
-                    {client.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-slate-100 text-slate-700 border border-slate-200/60"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                  {/* Footer Actions & Metrics */}
+                  <div className="mt-8 pt-5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    {/* Metrics preview */}
+                    {client.metrics && (
+                      <div className="flex items-center gap-4 text-xs">
+                        <div>
+                          <span className="font-extrabold text-slate-900 block text-sm font-mono">
+                            {client.metrics[0].value}
+                          </span>
+                          <span className="text-[10px] text-slate-400 uppercase font-semibold">
+                            {client.metrics[0].label}
+                          </span>
+                        </div>
+                        <div className="h-6 w-px bg-slate-200" />
+                        <div>
+                          <span className="font-extrabold text-[#1554A3] block text-sm font-mono">
+                            {client.metrics[1].value}
+                          </span>
+                          <span className="text-[10px] text-slate-400 uppercase font-semibold">
+                            {client.metrics[1].label}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Open Live Client Website */}
+                    <a
+                      href={client.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#1554A3] text-white hover:bg-[#0B1F3A] transition-all text-xs font-bold shadow-md hover:shadow-lg hover:scale-105"
+                    >
+                      <span>Visit Live Site</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
                   </div>
                 </div>
-
-                {/* Footer Actions & Metrics */}
-                <div className="mt-8 pt-5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  {/* Metrics preview */}
-                  {client.metrics && (
-                    <div className="flex items-center gap-4 text-xs">
-                      <div>
-                        <span className="font-bold text-slate-900 block">
-                          {client.metrics[0].value}
-                        </span>
-                        <span className="text-[10px] text-slate-400">
-                          {client.metrics[0].label}
-                        </span>
-                      </div>
-                      <div className="h-6 w-px bg-slate-200" />
-                      <div>
-                        <span className="font-bold text-[#1554A3] block">
-                          {client.metrics[1].value}
-                        </span>
-                        <span className="text-[10px] text-slate-400">
-                          {client.metrics[1].label}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Open Live Client Website */}
-                  <a
-                    href={client.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#1554A3] text-white hover:bg-[#0B1F3A] transition-all text-xs font-semibold shadow-xs"
-                  >
-                    <span>Visit Live Site</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
+              </Card3D>
             );
           })}
         </div>
